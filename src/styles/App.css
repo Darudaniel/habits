@@ -5,6 +5,7 @@
 	background: rgb(137,226,147);
 	background: linear-gradient(0deg, rgba(137,226,147,1) 0%, rgba(24,24,23,1) 100%);
 	padding-bottom: 50px;
+	height: 100vh;
 }
 .title {
 	color: beige;

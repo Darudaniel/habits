@@ -1,0 +1,22 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items:  center;
+	background: rgb(137,226,147);
+	background: linear-gradient(0deg, rgba(137,226,147,1) 0%, rgba(24,24,23,1) 100%);
+	padding-bottom: 50px;
+}
+.title {
+	color: beige;
+}
+
+.register {
+	font-size: 30px;
+}
+
+.indication {
+	text-align: center;
+	padding: 0 80px;
+	color: rgb(187, 255, 0);
+	font-size: 18px;
+}

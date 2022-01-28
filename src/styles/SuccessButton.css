@@ -1,0 +1,11 @@
+.success-button {
+    width: 200px;
+    height: 100px;
+    background: rgb(58,226,136);
+    background: linear-gradient(90deg, rgba(58,226,136,1) 0%, rgb(19, 238, 110) 32%, rgba(64,195,133,1) 100%);
+    font-size: 25px;
+    font-weight: 800;
+    border-radius: 10px;
+    box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+}

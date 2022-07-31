@@ -1,11 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import './styles/App.css'
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import db from './firebase/firebaseConfig';
+import db, { logout, signWithGoogle } from './firebase/firebaseConfig';
 import SuccessButton from './components/SuccessButton';
 
 function App() {
   const [diasRegister, setDiasRegister] = useState('nada')
+  const [name, setName] = useState('')
+
+  const userName = () => {
+    if (localStorage.getItem("name")) {
+      setName(localStorage.getItem("name"))
+      console.log(localStorage)
+    } else {
+      console.log('no se puedo extraer "name" del localStorage')
+    }
+  }
+
   //EXPLICACION
   // useEffect(() => {
   //   const obtenerDatos = async() => {
@@ -45,16 +56,27 @@ function App() {
     getDataFromFirebase()
   }
 
+  const testLog = () => {
+    console.log(localStorage.getItem("name"))
+    setName(localStorage.getItem("name"))
+  }
+
   useEffect(() => { 
     getDataFromFirebase()
+    testLog()
   }, [])
 
   return (
     <div className="App">
       <h1 className='title'>Habitos</h1>
       <p className='indication'>Oprime el boton los dias que hayas cumplido con todos los habitos de tu lista de habitos diarios</p>
-      <SuccessButton task={addTask} />
+      <SuccessButton task={addTask} text="SUCCESS" />
       <h2 className='registro'>Llevas {diasRegister} dias registrados</h2>
+      <SuccessButton task={signWithGoogle} text="Log in" />
+      <p>Loged users</p>
+      <p>{localStorage.getItem("name")}</p>
+      <SuccessButton task={testLog} text="Actualizar" />
+      <SuccessButton task={logout} text="Log out" />
     </div>
   );
 }

@@ -7,7 +7,7 @@ const SuccessButton = (props) => {
     }
 
     return (
-        <button className='success-button' type="button" onClick={handleClick} >EXITO</button>
+        <button className='success-button' type="button" onClick={handleClick} >{props.text}</button>
     )
 }
 

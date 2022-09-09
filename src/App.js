@@ -46,6 +46,7 @@ function App() {
       console.log("Datos registrados en la base de datos");
     } catch (e) {
       console.error("Error agregando documento: ", e);
+      alert('No tienes permisos suficientes para agregar un dia a la estadistica. Cuando actualices la pagina tu registro se borrará y apareceran las cifras reales.')
     }
   }
 

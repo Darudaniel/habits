@@ -7,6 +7,7 @@ import SuccessButton from './components/SuccessButton';
 function App() {
   const [diasRegister, setDiasRegister] = useState('nada')
   const [name, setName] = useState('')
+  const [diasList,  setDiasList] = useState({})
 
   const userName = () => {
     if (localStorage.getItem("name")) {
@@ -34,10 +35,50 @@ function App() {
   const getDataFromFirebase = async () => {
     const querySnapshot = await getDocs(collection(db, "dias-completos"));
     let daysCounter = 0
+    let weekDays = {
+      "monday": 0,
+      "tuesday": 0,
+      "wednesday": 0,
+      "thursday": 0,
+      "friday": 0,
+      "saturday": 0,
+      "sunday": 0
+    }
+
     querySnapshot.forEach((doc) => {
       daysCounter = daysCounter + 1
+      const day = doc.data().day
+      const dayArray = day.split(" ")
+      const dayName = dayArray[0] 
+      switch (dayName) {
+        case "Mon":
+          weekDays.monday = weekDays.monday + 1
+          break;
+        case "Tue":
+          weekDays.tuesday = weekDays.tuesday + 1
+          break;
+        case "Wed":
+          weekDays.wednesday = weekDays.wednesday + 1
+          break;
+        case "Thu":
+          weekDays.thursday = weekDays.thursday + 1
+          break;
+        case "Fri":
+          weekDays.friday = weekDays.friday + 1
+          break;
+        case "Sat":
+          weekDays.saturday = weekDays.saturday + 1
+          break;
+        case "Sun":
+          weekDays.sunday = weekDays.sunday + 1
+          break;
+        default:
+          console.log("El dia no es valido")
+          break;
+      }
     });
     setDiasRegister(daysCounter)
+    setDiasList(weekDays)
   }
 
   const addDataToFirebase = async (documento, datos) => {

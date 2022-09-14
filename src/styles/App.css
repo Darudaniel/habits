@@ -1,23 +1,89 @@
+:root {
+  --third-color: rgb(187, 255, 0);
+}
+
 .App {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items:  center;
+	align-items: center;
 	background: rgb(137,226,147);
 	background: linear-gradient(0deg, rgba(137,226,147,1) 0%, rgba(24,24,23,1) 100%);
 	padding-bottom: 50px;
 	height: 100%;
 }
-.title {
-	color: beige;
+
+.container {
+	height: 100%;
+	max-width: 700px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	gap: 0px;
 }
 
-.register {
-	font-size: 30px;
+.title {
+	color: beige;
+	grid-column-start: 1;
+  grid-column-end: span 4;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+	align-self: center;
+	text-align: center;
+}
+
+.graphic {
+	max-height: 300px;
+	max-width: 500px;
+	grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: span 2;
+	align-self: center;
 }
 
 .indication {
+	grid-column-start: 3;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+	align-self: center;
+	padding: 10px;
 	text-align: center;
-	padding: 0 80px;
-	color: rgb(187, 255, 0);
+	color: var(--third-color);
 	font-size: 18px;
+}
+
+.button-container {
+	grid-column-start: 3;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: span 1;
+	align-self: center;
+}
+
+.registro {
+	grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+  grid-row-end: span 1;
+	align-self: center;
+	text-align: center;
+}
+
+.user-name {
+	grid-column-start: 3;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+  grid-row-end: span 1;
+	align-self: center;
+	text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+  }  
 }

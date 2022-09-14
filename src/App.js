@@ -3,8 +3,13 @@ import './styles/App.css'
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import db, { logout, signWithGoogle } from './firebase/firebaseConfig';
 import SuccessButton from './components/SuccessButton';
+import { Chart as ChartJS, registerables } from 'chart.js';
+import { Chart } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 
 function App() {
+  ChartJS.register(...registerables);
+
   const [diasRegister, setDiasRegister] = useState('nada')
   const [name, setName] = useState('')
   const [diasList,  setDiasList] = useState({})
@@ -12,11 +17,11 @@ function App() {
   const userName = () => {
     if (localStorage.getItem("name")) {
       setName(localStorage.getItem("name"))
-      console.log(localStorage)
     } else {
       console.log('no se puedo extraer "name" del localStorage')
     }
   }
+
 
   //EXPLICACION
   // useEffect(() => {
@@ -103,6 +108,41 @@ function App() {
     setName(localStorage.getItem("name"))
   }
 
+  const graphicData = {
+    labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+    datasets: [{
+      label: "Hustle",
+      backgroundColor: "rgb(137,226,147)" ,
+      borderColor: "rgb(0, 0, 0)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(187, 255, 0, 0.336)",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+      hoverBorderColor: "rgb(0, 0, 0)",
+      data: [
+        diasList.monday,
+        diasList.tuesday,
+        diasList.wednesday,
+        diasList.thursday,
+        diasList.friday,
+        diasList.saturday,
+        diasList.sunday
+      ]
+    }]
+  }
+  const graphicOptions = {
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        legend: {
+            labels: {
+                // This more specific font property overrides the global property
+                font: {
+                    size: 10
+                }
+            }
+        }
+    }
+  }
+
   useEffect(() => { 
     getDataFromFirebase()
     testLog()
@@ -110,15 +150,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='title'>Habitos</h1>
-      <p className='indication'>Oprime el boton los dias que hayas cumplido con todos los habitos de tu lista de habitos diarios</p>
-      <SuccessButton task={addTask} text="SUCCESS" />
-      <h2 className='registro'>Llevas {diasRegister} dias registrados</h2>
-      <SuccessButton task={signWithGoogle} text="Log in" />
-      <p>Loged users</p>
-      <p>{localStorage.getItem("name")}</p>
-      <SuccessButton task={testLog} text="Actualizar" />
-      <SuccessButton task={logout} text="Log out" />
+      <section className="container">
+        <h1 className='title'>Habitos</h1>
+        <Bar className='graphic' data={graphicData} options={graphicOptions} />
+        <p className='indication'>Oprime el boton los dias que hayas cumplido con todos los habitos de tu lista de habitos diarios</p>
+        <div className='button-container'>
+          <SuccessButton task={addTask} text="SUCCESS" />
+        </div>
+        <h2 className='registro'>Llevas {diasRegister} dias registrados</h2>
+        <p className='user-name'>{localStorage.getItem("name")}</p>
+        <SuccessButton task={signWithGoogle} text="Log in" />
+        <SuccessButton task={testLog} text="Actualizar" />
+        <SuccessButton task={logout} text="Log out" />
+      </section>
     </div>
   );
 }

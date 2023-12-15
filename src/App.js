@@ -4,39 +4,15 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import db, { logout, signWithGoogle } from './firebase/firebaseConfig';
 import SuccessButton from './components/SuccessButton';
 import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2'
 import { Bar } from 'react-chartjs-2'
 
 function App() {
   ChartJS.register(...registerables);
 
   const [diasRegister, setDiasRegister] = useState('nada')
-  const [name, setName] = useState('')
   const [diasList,  setDiasList] = useState({})
 
-  const userName = () => {
-    if (localStorage.getItem("name")) {
-      setName(localStorage.getItem("name"))
-    } else {
-      console.log('no se puedo extraer "name" del localStorage')
-    }
-  }
-
-
-  //EXPLICACION
-  // useEffect(() => {
-  //   const obtenerDatos = async() => {
-  //     const datos = await getDocs(collection(db, 'usuarios'));
-  //     //para acceder a los datos del primer registro
-  //     console.log(datos.docs[0].data())
-  //     //para acceder a todos los datos
-  //     datos.forEach((documento) => {
-  //       console.log(documento.data());
-  //     })
-  //   }
-  //   obtenerDatos();
-  // }, [])
-
+ 
   const getDataFromFirebase = async () => {
     const querySnapshot = await getDocs(collection(db, "dias-completos"));
     let daysCounter = 0
@@ -88,7 +64,7 @@ function App() {
 
   const addDataToFirebase = async (documento, datos) => {
     try {
-      const docRef = await addDoc(collection(db, documento), datos);
+      await addDoc(collection(db, documento), datos);
       console.log("Datos registrados en la base de datos");
     } catch (e) {
       console.error("Error agregando documento: ", e);
@@ -105,7 +81,6 @@ function App() {
 
   const testLog = () => {
     console.log(localStorage.getItem("name"))
-    setName(localStorage.getItem("name"))
   }
 
   const graphicData = {
@@ -145,15 +120,14 @@ function App() {
 
   useEffect(() => { 
     getDataFromFirebase()
-    testLog()
   }, [])
 
   return (
     <div className="App">
       <section className="container">
-        <h1 className='title'>Habitos</h1>
+        <h1 className='title'>Habits</h1>
         <Bar className='graphic' data={graphicData} options={graphicOptions} />
-        <p className='indication'>Oprime el boton los dias que hayas cumplido con todos los habitos de tu lista de habitos diarios</p>
+        <p className='indication'>Congratulations, today you fulfilled all your habits. Record this achievement by pressing the success button</p>
         <div className='button-container'>
           <SuccessButton task={addTask} text="SUCCESS" />
         </div>

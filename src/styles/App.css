@@ -2,20 +2,22 @@
   --third-color: rgb(187, 255, 0);
 }
 
+html {
+	background: linear-gradient(0deg, rgba(137,226,147,1) 100%, rgba(24,24,23,1) 0%);
+}
+
 .App {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100vh;
+	justify-content: center;
+	padding: 20px;
 	background: linear-gradient(0deg, rgba(137,226,147,1) 0%, rgba(24,24,23,1) 100%);
-	padding-bottom: 160px;
 }
 
 .container {
 	max-width: 700px;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(4, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 	gap: 0px;
 }
 
@@ -66,10 +68,9 @@
   grid-row-start: 4;
   grid-row-end: span 1;
 	align-self: center;
-	text-align: start;
-	padding: 30px;
+	text-align: center;
+	padding: 10px;
 	color: white;
-	font-size: 2rem;
 }
 
 .user-name {

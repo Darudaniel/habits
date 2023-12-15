@@ -127,7 +127,7 @@ function App() {
       <section className="container">
         <h1 className='title'>Habits</h1>
         <Bar className='graphic' data={graphicData} options={graphicOptions} />
-        <p className='indication'>Congratulations, today you fulfilled all your habits. Record this achievement by pressing the success button</p>
+        <p className='indication'>Congratulations, today you fulfilled all your habits. Record this achievement by pressing the success button.</p>
         <div className='button-container'>
           <SuccessButton task={addTask} text="SUCCESS" />
         </div>

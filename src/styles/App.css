@@ -18,7 +18,7 @@ html {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
-	gap: 0px;
+	gap: 0 20px;
 }
 
 .title {
